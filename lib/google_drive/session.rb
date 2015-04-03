@@ -146,13 +146,13 @@ module GoogleDrive
           api_result = execute!(
             :api_method => self.drive.files.get,
             :parameters => { 'fileId' => id })
-          if api_result.status == 200
+          # if api_result.status == 200
             fail "============\n#{api_result}\n============"
+            fail "============\n#{wrap_api_file(api_result.data)}\n============"
             return wrap_api_file(api_result.data)
-            warn "============\n#{wrap_api_file(api_result.data)}\n============"
-          else
-            fail "An error occurred: #{api_result.data['error']['message']}"
-          end
+          # else
+          #   fail "An error occurred: #{api_result.data['error']['message']}"
+          # end
 
           # api_result = execute!(
           #   :api_method => self.drive.files.get,
