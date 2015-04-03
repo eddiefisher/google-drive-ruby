@@ -144,9 +144,20 @@ module GoogleDrive
         # Returns GoogleDrive::File or its subclass with a given +id+.
         def file_by_id(id)
           api_result = execute!(
-            :api_method => self.drive.files.get,
-            :parameters => { "fileId" => id })
-          return wrap_api_file(api_result.data)
+            :api_method => @drive.files.get,
+            :parameters => { 'fileId' => id })
+          if api_result.status == 200
+            warn "============\n#{api_result}\n============"
+            return wrap_api_file(api_result.data)
+            warn "============\n#{wrap_api_file(api_result.data)}\n============"
+          else
+            fail "An error occurred: #{api_result.data['error']['message']}"
+          end
+
+          # api_result = execute!(
+          #   :api_method => self.drive.files.get,
+          #   :parameters => { "fileId" => id })
+          # return wrap_api_file(api_result.data)
         end
 
         # Returns GoogleDrive::File or its subclass with a given +url+. +url+ must be eitehr of:
