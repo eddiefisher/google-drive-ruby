@@ -182,7 +182,7 @@ module GoogleDrive
         #   session.spreadsheet_by_key("1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0")
         def spreadsheet_by_key(key)
           file = file_by_id(key)
-          puts "================\n#{file.inspect}\n=============="
+          fail "================\n#{file.inspect}\n=============="
           if !file.is_a?(Spreadsheet)
             raise(GoogleDrive::Error, "The file with the ID is not a spreadsheet: %s" % key)
           end
