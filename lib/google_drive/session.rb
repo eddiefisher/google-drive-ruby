@@ -147,8 +147,6 @@ module GoogleDrive
             :api_method => self.drive.files.get,
             :parameters => { 'fileId' => id })
           # if api_result.status == 200
-            fail "============\n#{api_result.inspect}\n============"
-            fail "============\n#{wrap_api_file(api_result.data)}\n============"
             return wrap_api_file(api_result.data)
           # else
           #   fail "An error occurred: #{api_result.data['error']['message']}"
@@ -193,7 +191,6 @@ module GoogleDrive
         #   session.spreadsheet_by_key("1L3-kvwJblyW_TvjYD-7pE-AXxw5_bkb6S_MljuIPVL0")
         def spreadsheet_by_key(key)
           file = file_by_id(key)
-          fail "================\n#{file.inspect}\n=============="
           if !file.is_a?(Spreadsheet)
             raise(GoogleDrive::Error, "The file with the ID is not a spreadsheet: %s" % key)
           end
@@ -367,6 +364,7 @@ module GoogleDrive
         end
 
         def wrap_api_file(api_file) #:nodoc:
+          fail "============\n#{api_file.inspect}\n==============\n#{self}\n================"
           case api_file.mime_type
             when "application/vnd.google-apps.folder"
               return Collection.new(self, api_file)
