@@ -147,7 +147,7 @@ module GoogleDrive
             :api_method => self.drive.files.get,
             :parameters => { 'fileId' => id })
           # if api_result.status == 200
-            fail "============\n#{api_result}\n============"
+            fail "============\n#{api_result.inspect}\n============"
             fail "============\n#{wrap_api_file(api_result.data)}\n============"
             return wrap_api_file(api_result.data)
           # else
