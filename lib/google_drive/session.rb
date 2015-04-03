@@ -364,7 +364,7 @@ module GoogleDrive
         end
 
         def wrap_api_file(api_file) #:nodoc:
-          fail "============\n#{api_file.inspect}\n==============\n#{self}\n================"
+          fail "============\n#{api_file.mime_type.inspect}\n==============\n#{self.inspect}\n================"
           case api_file.mime_type
             when "application/vnd.google-apps.folder"
               return Collection.new(self, api_file)
