@@ -144,7 +144,7 @@ module GoogleDrive
         # Returns GoogleDrive::File or its subclass with a given +id+.
         def file_by_id(id)
           api_result = execute!(
-            :api_method => @drive.files.get,
+            :api_method => self.drive.files.get,
             :parameters => { 'fileId' => id })
           if api_result.status == 200
             warn "============\n#{api_result}\n============"
